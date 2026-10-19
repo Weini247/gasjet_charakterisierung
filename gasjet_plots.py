@@ -5,7 +5,7 @@ matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 from matplotlib.colors import LinearSegmentedColormap
 
-ordner = sys.argv[1]
+ordner = r"D:\Chrome\FP_08_26\FP_08_26"
 os.makedirs("plots", exist_ok=True)
 ergebnisse = open("ergebnisse.txt", "w", encoding="utf-8")
 
@@ -34,17 +34,19 @@ def save_fig(fig, title, name, unit, mm_achsen = False):
         width = columns * mmpp
         hoehe = rows * mmpp
         plt.imshow(fig, cmap=parula, aspect="auto", extent=[-width / 2, width / 2, 0, hoehe])
-    else:
-        plt.imshow(fig, cmap=parula, aspect="auto")
         plt.xlabel("x [mm]")
         plt.ylabel("z [mm]")
+    else:
+        plt.imshow(fig, cmap=parula, aspect="auto")
+        plt.xlabel("Spalte [px]")
+        plt.ylabel("Zeile [px]")
     plt.colorbar(label=unit)
     plt.title(title)
-    plt.savefig("plots/" + name + "pdf", bbox_inches="tight")
+    plt.savefig("plots/" + name + ".pdf", bbox_inches="tight")
     plt.close()
 
 
-ref_fig = np.loadtxt(glob.glob(ordner + "/Cam/Results/INT".txt)[0])
+ref_fig = np.loadtxt(glob.glob(ordner + "/Cam/Results/INT*.txt")[0])
 plt.figure()
 plt.imshow(ref_fig, cmap=parula, aspect="auto")
 plt.colorbar(label="Intensitaet [counts]")
@@ -59,7 +61,7 @@ plt.close()
 write("Aufgabe 3: Pixelgroesse = " + str(round(mmpp, 4)) + " mm/px")
 
 pfad = ordner + "/Processed_data/10barGasDruck/Results/PHA SID4 13h42m03s"
-image_gas = np.loadtxt(pfad + "256ms.txt")
+image_gas = np.loadtxt(pfad + "265ms.txt")
 image_nogas = np.loadtxt(pfad + "225ms.txt")
 image_nogas_after = np.loadtxt(pfad + "305ms.txt")
 
@@ -87,11 +89,11 @@ def kosinus(r,n, R):
 def abel_projektion(y , n, R):
     if abs(y) >= R:
         return 0.0
-    t = np.linespace(0, np.sqrt(R ** 2 - y ** 2), 400)
+    t = np.linspace(0, np.sqrt(R ** 2 - y ** 2), 400)
     r = np.sqrt(y ** 2 + t **2)
     return 2 * np.trapezoid(kosinus(r,n,R), t)
 
-def density_calc(density, number_of_cosines):
+def density_calc(druck, number_of_cosines):
     data = glob.glob(ordner + "/Abbildungen/" + str(druck) + "bar/substracted *.txt")
     sum = 0
     for datei in data:
@@ -121,7 +123,7 @@ def density_calc(density, number_of_cosines):
         beste_spalte = mid
         kleinste_differenz = 1e9
         for c in range(1, cols - 1):
-            differenz = abs(zeile[:c].mean() - zeile[c:].mean())
+            differenz = abs(row[:c].mean() - row[c:].mean())
             if differenz < kleinste_differenz:
                 kleinste_differenz = differenz
                 beste_spalte = c
