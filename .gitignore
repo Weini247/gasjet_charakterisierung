@@ -1,0 +1,13 @@
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+.local/
+data/
+raw/
+runs/
+*.tif
+*.tiff
+*.npy
+*.npz
+*.zip
