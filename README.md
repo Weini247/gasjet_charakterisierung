@@ -1,77 +1,12 @@
 # Gasjet-Charakterisierung
 
-Fortgeschrittenenpraktikum Physik an der Heinrich-Heine-Universität Düsseldorf. Aus den Phasenbildern eines SID4-Wellenfrontsensors werden radiale Dichteprofile des Gasjets rekonstruiert. Dieses Repository versammelt die **bisherigen Praktikumsplots und eine neue, numerisch geprüfte Auswertung** in einer README.
+Fortgeschrittenenpraktikum Physik an der Heinrich-Heine-Universität Düsseldorf. Aus den Phasenbildern eines SID4-Wellenfrontsensors werden radiale Dichteprofile des Gasjets rekonstruiert. Die gezeigten Dichtekarten, Profilvergleiche und der synthetische Referenztest werden mit dem Auswertungscode dieses Repositories erzeugt.
 
 Versuch und ursprüngliche Auswertung: Jonas Weingart und Levin Gleinert (laut Versuchsbericht).
 
-[Praktikumsplots](#praktikumsplots) · [Neue Auswertung](#neue-auswertung) · [Reproduktion](#reproduktion)
+[Auswertung](#auswertung) · [Reproduktion](#reproduktion)
 
-## Praktikumsplots
-
-Die Galerie enthält **85 Plotvorlagen** aus den fünf lokalen Abbildungssammlungen, einschließlich aller **27 PDFs** aus der Python-Auswertung. Die Dateititel unter den Bildern identifizieren die jeweilige Vorlage. Die Tafeln lassen sich zur größeren Ansicht anklicken. Die ersten fünf zeigen Pixelkalibrierung (A3), Referenzsubtraktion (A5), Dichtekarten, radiale Profile und den Vergleich der Kosinusordnungen (A6). Historische Skalen und Beschriftungen bleiben als Teil der damaligen Auswertung sichtbar. Für die Zahlen der Neuauswertung gilt der unten dokumentierte Maßstab.
-
-Eingebettete Intensitäts- und Phasenbilder in den PDF-Vorlagen wurden vor dem Rendern auf höchstens 30 × 22 Farbzellen reduziert. Bereits flache Archivbilder sind gröbere Vorschaubilder, bei denen auch kleine Achsenbeschriftungen an Lesbarkeit verlieren. Originaldateien, native Raster und Messmatrizen bleiben lokal.
-
-
-### Python-Auswertung · 27 Vorlagen
-
-[![Python-Auswertung, Tafel 1](results/archiv/praktikum-01.webp)](results/archiv/praktikum-01.webp)
-
-[![Python-Auswertung, Tafel 2](results/archiv/praktikum-02.webp)](results/archiv/praktikum-02.webp)
-
-[![Python-Auswertung, Tafel 3](results/archiv/praktikum-03.webp)](results/archiv/praktikum-03.webp)
-
-[![Python-Auswertung, Tafel 4](results/archiv/praktikum-04.webp)](results/archiv/praktikum-04.webp)
-
-[![Python-Auswertung, Tafel 5](results/archiv/praktikum-05.webp)](results/archiv/praktikum-05.webp)
-
-
-<details>
-<summary>Abgabeabbildungen zu Aufgabe 6 · 3 Vorlagen</summary>
-
-[![Abgabeabbildungen zu Aufgabe 6, Tafel 1](results/archiv/abgabe-01.webp)](results/archiv/abgabe-01.webp)
-
-</details>
-
-
-<details>
-<summary>Langfassung zu Aufgabe 6 · 6 Vorlagen</summary>
-
-[![Langfassung zu Aufgabe 6, Tafel 1](results/archiv/lang-01.webp)](results/archiv/lang-01.webp)
-
-</details>
-
-
-<details>
-<summary>Weitere Vergleichsfassungen · 22 Vorlagen</summary>
-
-[![Weitere Vergleichsfassungen, Tafel 1](results/archiv/minimal-01.webp)](results/archiv/minimal-01.webp)
-
-[![Weitere Vergleichsfassungen, Tafel 2](results/archiv/minimal-02.webp)](results/archiv/minimal-02.webp)
-
-[![Weitere Vergleichsfassungen, Tafel 3](results/archiv/minimal-03.webp)](results/archiv/minimal-03.webp)
-
-[![Weitere Vergleichsfassungen, Tafel 4](results/archiv/minimal-04.webp)](results/archiv/minimal-04.webp)
-
-</details>
-
-
-<details>
-<summary>Historische Plotfassungen · 27 Vorlagen</summary>
-
-[![Historische Plotfassungen, Tafel 1](results/archiv/archiv-01.webp)](results/archiv/archiv-01.webp)
-
-[![Historische Plotfassungen, Tafel 2](results/archiv/archiv-02.webp)](results/archiv/archiv-02.webp)
-
-[![Historische Plotfassungen, Tafel 3](results/archiv/archiv-03.webp)](results/archiv/archiv-03.webp)
-
-[![Historische Plotfassungen, Tafel 4](results/archiv/archiv-04.webp)](results/archiv/archiv-04.webp)
-
-[![Historische Plotfassungen, Tafel 5](results/archiv/archiv-05.webp)](results/archiv/archiv-05.webp)
-
-</details>
-
-## Neue Auswertung
+## Auswertung
 
 Die Neuauswertung verwendet die **40 vorhandenen Differenzbilder** der vier Druckstufen mit je zehn Bildern. Sie setzt bei der bereits gebildeten Phasendifferenz an. Zusätzlich werden drei ursprüngliche SID4-Phasenexporte bei 10 bar für einen gezielten Referenzvergleich gelesen. Die Zuordnung aller 40 Differenzbilder zu den jeweils eingesetzten Gas- und Referenzframes ist nicht vollständig belegt.
 
@@ -124,9 +59,8 @@ Mit lokalem Zugriff auf den Originalbestand:
 
 ```sh
 python gasjet_plots.py --data-root /pfad/zur/versuchsablage --output-dir .local/auswertung
-python build_gallery.py --source-dir /pfad/zur/versuchsablage --output-dir .local/galerie
 ```
 
-Die Auswertung liest die zehn kommagetrennten Differenzmatrizen pro Druck aus `Abbildungen/<Druck>bar` sowie die drei dokumentierten SID4-Exporte aus `Processed_data/10barGasDruck/Results`. Die Galerie benötigt ihre historischen Vorlagen nur beim lokalen Neuaufbau. Die öffentlich enthaltenen Dateien sind Code, Tests, reduzierte Galerietafeln, abgeleitete Abbildungen und kompakte Ergebnistabellen. Messdaten und Arbeitsläufe gehören in das lokale Quellarchiv beziehungsweise in `.local/`.
+Die Auswertung liest die zehn kommagetrennten Differenzmatrizen pro Druck aus `Abbildungen/<Druck>bar` sowie die drei dokumentierten SID4-Exporte aus `Processed_data/10barGasDruck/Results`. Die veröffentlichten Dateien sind Code, Tests, neu erzeugte Abbildungen und kompakte Ergebnistabellen. Messdaten und Arbeitsläufe gehören in das lokale Quellarchiv beziehungsweise in `.local/`.
 
-[gasjet.py](gasjet.py) enthält Vorwärtsmodell, Rekonstruktion und Referenztest. [gasjet_plots.py](gasjet_plots.py) erzeugt Tabellen und neue Abbildungen. [build_gallery.py](build_gallery.py) bereitet die historischen Plotvorlagen für die Galerie auf.
+[gasjet.py](gasjet.py) enthält Vorwärtsmodell, Rekonstruktion und Referenztest. [gasjet_plots.py](gasjet_plots.py) erzeugt Tabellen und neue Abbildungen.
